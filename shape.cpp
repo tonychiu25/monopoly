@@ -39,11 +39,11 @@ class Triangle: public Shape{
          cout << "Triangle class area :" <<endl;
          return (width * height / 2); 
       }
-};
 
-void printShape(Shape * s) {
-  s->area();
-}
+      void printTriangle() {
+        cout<<"Triangle"<<endl;
+      }
+};
 
 int main( )
 {
@@ -56,6 +56,9 @@ int main( )
 
    shapeTri = &tri;
    shapeTri->area();
+   
+   Shape * tri2 = new Triangle(2,3);
+   tri2->printTriangle();
 
    return 0;
 }

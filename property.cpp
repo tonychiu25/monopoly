@@ -1,17 +1,19 @@
 #include <stdlib.h>
-#include "add.h"
+#include "fields.cpp"
 
 class Property : public Fields{
-  protected : int cost, int ownerIndex;
+  protected : int cost, ownerIndex;
   public :
-    Property(int c) {
+    Property(int i,int c, string n) {
       int cost = c;
+      index = i;
+      name = n;
       ownerIndex = -1;
     }
 
-  public bool : checkProperyBought() {
+  public : bool checkVacancy() {
     bool propertyBought;
-    if (ownerIndex == -1) {
+    if (ownerIndex == -1) {  // -1 indicates vacant
       propertyBought = false;
     } else {
       propertyBought = true;
@@ -19,4 +21,8 @@ class Property : public Fields{
 
     return propertyBought;
   }
-}
+
+  public : void buyProperty(int playerIndex) {
+    ownerIndex = playerIndex;
+  } 
+};
