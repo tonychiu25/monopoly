@@ -1,30 +1,18 @@
 #include <stdlib.h>
 #include <iostream>
+#include <string>
 using namespace std;
 
-class fields {
+class Fields {
   protected : int index;
   protected : string name;
+  
+  public : Fields(int i, string n) {
+    index = i;
+    name = n;
+  }
 
+  public : string getName() {
+    return name;
+  }
 };
-
-class CPolygon{
-  protected: int width, height;
-  public :
-    void set_values(int a, int b){
-      width = a;
-      height = b;
-    }
-  };
-
-class CTriangle : public CPolygon{
-  public:
-    int area() {
-      return (width * height);
-    }
-  };
-
-int main() {
-
-  return 0;
-}
