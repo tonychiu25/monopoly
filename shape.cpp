@@ -58,7 +58,16 @@ int main( )
    shapeTri->area();
    
    Shape * tri2 = new Triangle(2,3);
-   tri2->printTriangle();
+   
+   void *pVoidRect = &rec;
+   void *pVoidTri = &tri;
+
+   void * A[2];
+   A[0] = pVoidRect;
+   A[1] = pVoidTri;
+
+   Rectangle * rPointer = (Rectangle*) A[0];
+   rPointer->area(); 
 
    return 0;
 }

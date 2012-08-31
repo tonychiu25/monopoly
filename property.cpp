@@ -4,10 +4,9 @@
 class Property : public Fields{
   protected : int cost, ownerIndex;
   public :
-    Property(int i,int c, string n) {
+    explicit Property(int i, string n, char t, int c) : Fields(i, n, t) {
+      cout<<c<<endl;
       int cost = c;
-      index = i;
-      name = n;
       ownerIndex = -1;
     }
 
@@ -24,5 +23,13 @@ class Property : public Fields{
 
   public : void buyProperty(int playerIndex) {
     ownerIndex = playerIndex;
-  } 
+  }
+
+  public : int getPropertyCost() {
+    return cost;
+  }
+
+  public : int getOwnerIndex() {
+    return ownerIndex;
+  }
 };
