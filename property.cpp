@@ -1,11 +1,11 @@
-#include <stdlib.h>
+//#include <stdlib.h>
 #include "fields.cpp"
+//#include "fields.h"
 
 class Property : public Fields{
   protected : int cost, ownerIndex;
   public :
-    explicit Property(int i, string n, char t, int c) : Fields(i, n, t) {
-      cout<<c<<endl;
+    explicit Property(int i, std::string n, char t, int c) : Fields(i, n, t) {
       int cost = c;
       ownerIndex = -1;
     }

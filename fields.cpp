@@ -1,20 +1,20 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
-using namespace std;
+//using namespace std;
 
 class Fields {
-  protected : int index;     
-  protected : string name;
-  protected : char type;   // The type of landing on the monopoly board.
+  private : int index;     
+  private : std::string name;
+  private : char type;   // The type of landing on the monopoly board.
   public :
-    Fields(int i, string n, char t) {
+    Fields(int i, std::string n, char t) {
       index = i;
       name = n;
       type = t;
     }
 
-  public : string getName() {
+  public : std::string getName() {
     return name;
   }
 

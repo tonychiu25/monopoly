@@ -1,17 +1,19 @@
 #include <stdlib.h>
 #include <iostream>
-#include "realestate.cpp"
+#include "lot.cpp"
+//#include "railroad.cpp"
 
 using namespace std;
 
 int main() { 
   
-  Realestate r(1, "Broadway", 233, 12);
-  
-  cout<<r.getName()<<endl;
-  cout<<r.getFieldType()<<endl;
-  cout<<r.getPropertyCost()<<endl;
-  cout<<r.getOwnerIndex()<<endl;
-  cout<<r.getRentCost()<<endl;
+  Lot l(1, "Broadway", 233, 12);
+  //Railroad r(5, "Hanzomon", 200);
+ 
+  cout<<l.getName()<<endl;
+  cout<<l.getFieldType()<<endl;
+  cout<<l.getPropertyCost()<<endl;
+  cout<<l.getOwnerIndex()<<endl;
+  //cout<<r.getRentCost()<<endl;
   return 0;
 }
