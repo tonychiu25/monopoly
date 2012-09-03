@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <iostream>
-//using namespace std;
+using namespace std;
 
 class Fields {
-  private : int index;     
+  private : int index, currentPlayerOccupy;
   private : std::string name;
   private : char type;   // The type of landing on the monopoly board.
   public :
@@ -11,6 +11,7 @@ class Fields {
       index = i;
       name = n;
       type = t;
+      currentPlayerOccupy = -1;
     }
 
   public : std::string getName() {
@@ -20,9 +21,12 @@ class Fields {
   public : char getFieldType() {
     return type;
   }
-};
 
-int main() {
-  cout<<"D"<<endl;
-  return 1;
-}
+  public : int getCurrentPlayerOccupy() {
+    return 1;
+  }
+
+  public : void setCurrentPlayerOccupy() {
+    
+  }
+};

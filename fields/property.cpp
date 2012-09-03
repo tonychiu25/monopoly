@@ -3,10 +3,10 @@
 //#include "fields.h"
 
 class Property : public Fields{
-  protected : int cost, ownerIndex;
+  private : int cost, ownerIndex;
   public :
     explicit Property(int i, std::string n, char t, int c) : Fields(i, n, t) {
-      int cost = c;
+      cost = c;
       ownerIndex = -1;
     }
 
