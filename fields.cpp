@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <iostream>
-#include <string>
 //using namespace std;
 
 class Fields {
@@ -22,3 +21,8 @@ class Fields {
     return type;
   }
 };
+
+int main() {
+  cout<<"D"<<endl;
+  return 1;
+}
