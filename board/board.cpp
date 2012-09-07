@@ -1,13 +1,10 @@
 #include <stdlib.h>
 #include <iostream>
-#include <vector>
 using namespace std;
 
 #include "board.h"
 
 Board::Board() {
-  board = (Field*) malloc (sizeof(Field) * 40);
-  
 }
 
 Field * Board::createLot(int i, std::string n, int c, int buildingCost, int * rentCostList) {
@@ -28,17 +25,28 @@ Field * Board::createRail(int i, std::string n, int buycost) {
 
 void Board::generateMonopolyBoard() {
   Field * fp;
+  Lot * lp;
   int rentlist[5] = {1,2,3,4,5};
 
-  Field * b = new Field[3];
-
   fp = createLot(1, "Broadway", 22,22, rentlist);
+  board.push_back(fp);
   fp = createLot(2, "Bronx", 22, 22, rentlist);
+  board.push_back(fp);
+}
+
+Field * Board::getFieldAtPosition(int position) {
+  Field * fp;
+  fp = board.at(position);
+  cout<<fp->getName()<<endl;
+  return fp;
 }
 
 int main() {
   Board * board = new Board();
   board->generateMonopolyBoard();  
+  
+  Field *fp;
+  fp = board->getFieldAtPosition(0);
 
   return 1;
 }
