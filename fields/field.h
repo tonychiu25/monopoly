@@ -1,6 +1,8 @@
 #ifndef FIELD_H
 #define FIELD_H
 
+using namespace std;
+
 class Field {
 
   protected :
@@ -9,10 +11,11 @@ class Field {
     std::string name;
     char fieldtype;
   public :
-    void initializeField(int i, std::string n, char type);
+    Field (int i, std::string n, char type);
     void setCurrentPlayerOccupy(int playerIndex);
     int getCurrentPlayerOccupy();
     char getFieldType();
     std::string getName();
 };
 #endif
+

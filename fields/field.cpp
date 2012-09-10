@@ -1,10 +1,8 @@
 #include <stdlib.h>
 #include <iostream>
-//using namespace std;
-using namespace std;
 #include "field.h"
 
-void Field::initializeField(int i, std::string n, char type) {
+Field::Field(int i, std::string n, char type) {
   index = i;
   name = n;
   fieldtype = type;
@@ -12,7 +10,7 @@ void Field::initializeField(int i, std::string n, char type) {
 }
 
 void Field::setCurrentPlayerOccupy(int playerIndex) {
-  
+
 }
 
 int Field::getCurrentPlayerOccupy() {

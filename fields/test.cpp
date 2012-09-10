@@ -1,27 +1,19 @@
 #include <stdlib.h>
+#include <iostream>
+using namespace std;
+#include "lot.h"
 
-namespace std;
-class A{
-  protected : int x,y;
-  public :
-    A(int one, int two) {
-      x = one;
-      y = two;
-    }
-};
-
-class B : public A{
-  protected : int z;
-  public:
-    explicit B(int one, int two, int three) : A(one, two) {
-      z = three;
-    }
-
-    void printB() {
-      cout<<
-    }
-};
 
 int main() {
-  return 0;
+  
+  Field * f = new Lot(1,"Parking Lot", 22,33);
+  cout<<f->getFieldType()<<endl;
+  Lot * l = (Lot*)f;
+  cout<<l->getPropertyCost()<<endl;
+  cout<<l->getBuildingCount()<<endl;
+  cout<<l->getRentCost()<<endl;
+
+  Property * pp = new Property(2,"das", 'R', 3);
+  //cout<<pp->getRentCost()<<endl;
+  return 1;
 }

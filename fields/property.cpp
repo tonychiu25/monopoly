@@ -1,35 +1,35 @@
-//#include <stdlib.h>
-#include "fields.cpp"
-//#include "fields.h"
+#include <stdlib.h>
+#include <iostream>
+using namespace std;
+#include "property.h"
 
-class Property : public Fields{
-  private : int cost, ownerIndex;
-  public :
-    explicit Property(int i, std::string n, char t, int c) : Fields(i, n, t) {
-      cost = c;
-      ownerIndex = -1;
-    }
+Property::Property(int i, std::string n, char type, int cost) : Field(i,n,type) {
+  propertycost = cost;
+  ownerIndex = -1;
+  rentCost = 0;
+}
 
-  public : bool checkVacancy() {
-    bool propertyBought;
-    if (ownerIndex == -1) {  // -1 indicates vacant
-      propertyBought = false;
-    } else {
-      propertyBought = true;
-    }
-
-    return propertyBought;
+bool Property::checkVacancy() {
+  bool propertyBought;
+  if (ownerIndex == -1) {  // -1 indicates vacant
+    propertyBought = false;
+  } else {
+    propertyBought = true;
   }
+}
 
-  public : void buyProperty(int playerIndex) {
-    ownerIndex = playerIndex;
-  }
+void Property::buyProperty(int playerIndex){
+  ownerIndex = playerIndex;
+}
 
-  public : int getPropertyCost() {
-    return cost;
-  }
+int Property::getPropertyCost(){
+  return propertycost;
+}
 
-  public : int getOwnerIndex() {
-    return ownerIndex;
-  }
-};
+int Property::getOwnerIndex() {
+  return ownerIndex;
+}
+
+int Property::getRentCost() {
+  return rentCost;
+}

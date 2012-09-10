@@ -1,0 +1,2 @@
+all: field.h
+	g++ field.cpp -o hello

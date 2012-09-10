@@ -1,25 +1,26 @@
-#include "property.cpp"
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <string.h>
+using namespace std;
+#include "lot.h"
 
-const int maxBuilding = 5;
+Lot::Lot(int i, std::string n, int c, int houseCost, int rent[]) : Property(i,n,'L',c) {
+  buildingCost = houseCost;
+  buildingCount = 0;
+  rentCostList = (int *) malloc (sizeof(int) * 5);
+  memcpy(rentCostList, rent, sizeof(int)*5);
+  rentCost = rent[0];
+}
 
-class Lot : public Property{
-  private : int rentcost, buildingCount, buildingCost;
-  public :  // Constructor for Realestate class
-    explicit Lot(int i, std::string n, int c, int buildCost) : Property(i,n,'l',c) {
-      buildingCost = buildCost;
-      buildingCount = 0; 
-    }
+int Lot::getBuildingCount() {
+  return buildingCount;
+}
 
-  public : int getBuildingCount() {
-    return buildingCount;
-  }
+void Lot::addBuilding() {
+  buildingCount++;
+}
 
-  public : void addBuilding() {
-      buildingCount++;
-  }
-};
-
-int main() {
-  Lot l(1,"Broadway", 22, 23);
-  return 1;
+int Lot::getRentCost() {
+  return rentCostList[buildingCount]; 
 }

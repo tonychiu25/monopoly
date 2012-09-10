@@ -101,7 +101,7 @@ Field * Board::getFieldAtPosition(int position) {
   return fp;
 }
 
-int main() {
+/*int main() {
   Board * board = new Board();
   board->generateMonopolyBoard();
   
@@ -112,5 +112,6 @@ int main() {
   lp->addBuilding();
   lp->addBuilding();
 
+  cout<<lp->getRentCost()<<endl;
   return 1;
-}
+}*/

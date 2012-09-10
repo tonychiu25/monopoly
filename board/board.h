@@ -2,8 +2,8 @@
 #define BOARD_H
 
 #include <vector>
-#include "../fields3/lot.h"
-#include "../fields3/rail_utility.h"
+#include "../fields/lot.h"
+#include "../fields/rail_utility.h"
 
 class Board {
 
