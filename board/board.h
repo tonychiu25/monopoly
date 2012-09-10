@@ -17,7 +17,8 @@ class Board {
     Field * createRail(int i, std::string n, int buycost);
     vector<Field*> board;
     void addLotToBoard(int i, std::string n, int c, int buildingCost, int r0, int r1, int r2, int r3, int r4, int r5);
-    void addRailToBoard()
+    void addNonLotPropertyToBoard(int i, std::string n, int c, char type);
+    void addFieldToBoard(int i, std::string n, char type);
 };
 
 #endif
