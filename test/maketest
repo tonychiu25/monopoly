@@ -1,0 +1,8 @@
+# Makefile.common
+TOP := /home/chiu.sintung/cstuff/monopoly/
+BOARD_DIR := $(TOP)board
+TEST_DIR := $(TOP)test
+FIELD_DIR := $(TOP)fields
+
+all:
+	g++ $(FIELD_DIR)/field.cpp $(FIELD_DIR)/property.cpp $(FIELD_DIR)/lot.cpp $(FIELD_DIR)/rail_utility.cpp $(BOARD_DIR)/board.cpp $(TEST_DIR)/fieldTest.cpp $(TEST_DIR)/propertyTest.cpp $(TEST_DIR)/lotTest.cpp

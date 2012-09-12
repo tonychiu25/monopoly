@@ -5,6 +5,8 @@ using namespace std;
 
 Rail_Utility::Rail_Utility(int i, std::string n, int c, char type) : Property(i,n,type,c) {}
 
+Rail_Utility::~Rail_Utility(){};
+
 void Rail_Utility::setRentCost(int rent) {
   rentCost = rent;
 }

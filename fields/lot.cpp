@@ -8,9 +8,13 @@ using namespace std;
 Lot::Lot(int i, std::string n, int c, int houseCost, int rent[]) : Property(i,n,'L',c) {
   buildingCost = houseCost;
   buildingCount = 0;
-  rentCostList = (int *) malloc (sizeof(int) * 5);
-  memcpy(rentCostList, rent, sizeof(int)*5);
+  rentCostList = (int *) malloc (sizeof(int) * maxBuildingCount);
+  memcpy(rentCostList, rent, sizeof(int)*maxBuildingCount);
   rentCost = rent[0];
+}
+
+Lot::~Lot() {
+  delete rentCostList;
 }
 
 int Lot::getBuildingCount() {
@@ -18,7 +22,13 @@ int Lot::getBuildingCount() {
 }
 
 void Lot::addBuilding() {
-  buildingCount++;
+  if (buildingCount < maxBuildingCount) {  
+    buildingCount++;
+  }
+}
+
+int Lot::getBuildingCost() {
+  return buildingCost;
 }
 
 int Lot::getRentCost() {

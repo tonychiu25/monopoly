@@ -12,8 +12,10 @@ class Field {
     char fieldtype;
   public :
     Field (int i, std::string n, char type);
+    ~Field();
     void setCurrentPlayerOccupy(int playerIndex);
     int getCurrentPlayerOccupy();
+    int getFieldIndex();
     char getFieldType();
     std::string getName();
 };

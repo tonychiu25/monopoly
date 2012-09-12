@@ -5,6 +5,8 @@
 #include "../fields/lot.h"
 #include "../fields/rail_utility.h"
 
+#define totalBuildings 36
+
 class Board {
 
   protected :

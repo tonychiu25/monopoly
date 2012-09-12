@@ -9,6 +9,8 @@ Property::Property(int i, std::string n, char type, int cost) : Field(i,n,type) 
   rentCost = 0;
 }
 
+Property::~Property() {}
+
 bool Property::checkVacancy() {
   bool propertyBought;
   if (ownerIndex == -1) {  // -1 indicates vacant
@@ -16,6 +18,8 @@ bool Property::checkVacancy() {
   } else {
     propertyBought = true;
   }
+
+  return propertyBought;
 }
 
 void Property::buyProperty(int playerIndex){
