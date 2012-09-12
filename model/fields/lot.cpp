@@ -5,7 +5,7 @@
 using namespace std;
 #include "lot.h"
 
-Lot::Lot(int i, std::string n, int c, int houseCost, int rent[]) : Property(i,n,'L',c) {
+Lot::Lot(int i, std::string n, int c, int houseCost, int rent[], char color) : Property(i,n,'L',c) {
   buildingCost = houseCost;
   buildingCount = 0;
   rentCostList = (int *) malloc (sizeof(int) * maxBuildingCount);

@@ -10,8 +10,9 @@ class Lot : public Property{
     int buildingCost;
     int rentcost;
     int * rentCostList;
+    char color;
   public :
-    Lot (int i, std::string n, int c, int buildingCost, int rent[]);
+    Lot (int i, std::string n, int c, int buildingCost, int rent[], char color);
     ~Lot(); 
     int getBuildingCount();
     int getRentCost();
