@@ -7,6 +7,7 @@ using namespace std;
 #include "board.h"
 
 Board::Board() {}
+Board::~Board() {}
 
 void Board::addLotToBoard(int i, std::string n, int c, int buildingCost, int r0, int r1, int r2, int r3, int r4, int r5, char color) {
   Field * fp;
@@ -17,6 +18,7 @@ void Board::addLotToBoard(int i, std::string n, int c, int buildingCost, int r0,
   Lot * lp = new Lot(i, n, c, buildingCost, rentCostList, color);
   fp = (Field*)lp;
   board.push_back(fp);
+  putLotColor(color, i);
 }
 
 void Board::addNonLotPropertyToBoard(int i, std::string n, int c, char type) {
@@ -34,15 +36,90 @@ void Board::addFieldToBoard(int i, std::string n, char type) {
 }
 
 void Board::putLotColor(char color, int i) {
-  map<char, vector<int> >::iterator it;
-  vector<int> * lotset;
+  map<char, vector<int>* >::iterator it;
+  vector<int> * lotvector;
   it = lotset.find(color);
   if (it == lotset.end()) {  // element not found
-    lotset = new vector<int>();
-    newlotset->push_back(i);
-    lotset.insert( pair<char, vector<int> > );
+    lotvector = new vector<int>();
+    lotvector->push_back(i);
+    lotset.insert( pair<char, vector<int>* >(color, lotvector) ); 
   } else {
-    
+    lotvector = lotset.find(color)->second;
+    lotvector->push_back(i);
+  }
+}
+
+void Board::setOwnerProperty(int boardPos, int playerIndex) {
+  Field * fp;
+  Property * pp;
+  
+  fp = getFieldAtPosition(boardPos);
+  pp = castToPropertyPt(fp);
+  
+  pp->setPropertyOwner(playerIndex);
+}
+
+void Board::erectBuilding(int boardPos) {
+  Field * fp;
+  Lot * lp;
+
+  fp = getFieldAtPosition(boardPos);
+  lp = castToLotPt(fp);
+
+  lp->addBuilding(); 
+}
+
+vector<int>* Board::getLotColorVector(char color) {
+  return lotset.find(color)->second;
+}
+
+Lot * Board::castToLotPt(Field * fp) {
+  Lot * lp;
+  lp = (Lot *) fp;
+  return lp;
+}
+
+Property * Board::castToPropertyPt(Field *fp) {
+  Property * pp;
+  pp = (Property *) fp;
+  
+  return pp;
+}
+
+bool Board::canBuildOnLot(int playerIndex, char color) {
+  vector<int> * lotvector;
+  Lot * lp;
+  int lotIndex;
+  lotvector = getLotColorVector(color);
+  for (int i=0; i<lotvector->size(); i++) {
+    lotIndex = lotvector->at(i);
+    lp = castToLotPt(getFieldAtPosition(lotIndex));
+    if (lp->getOwnerIndex() != playerIndex) {
+      return false;
+    }
+  }
+
+  return true; 
+}
+
+bool Board::canPurchaseProperty(int boardPos) {
+  Field * fp;
+  Property * pp;
+
+  fp = getFieldAtPosition(boardPos);
+  pp = (Property*) fp;
+  return pp->checkVacancy();
+}
+
+int Board::getPropertyRent(int boardPos) {
+  Field * fp;
+  Property * pp;
+
+  pp = (Property*) fp;
+  if (pp->checkVacancy()) {
+    return 0;
+  } else {
+    return pp->getRentCost();
   }
 }
 
@@ -51,9 +128,9 @@ void Board::generateMonopolyBoard() {
   Lot * lp;
 
   addFieldToBoard(0, "Start", 'S');
-  addLotToBoard(1, "Old Kent Road", 60, 50, 2, 10, 30, 90, 160, 250, 'G');
+  addLotToBoard(1, "Old Kent Road", 60, 50, 2, 10, 30, 90, 160, 250, 'L');
   addFieldToBoard(2, "Community Chest", 'H');
-  addLotToBoard(3, "Whitechapel Road", 60, 50, 4, 20, 60, 180, 320, 450, 'G');
+  addLotToBoard(3, "Whitechapel Road", 60, 50, 4, 20, 60, 180, 320, 450, 'L');
   addFieldToBoard(4, "Income Tax", 'I');
   addNonLotPropertyToBoard(5, "Kings Cross Station", 200, 'R');
   addLotToBoard(6, "The Angel Islington", 100, 50, 6, 30, 90, 270, 400, 550, 'T');
@@ -88,7 +165,7 @@ void Board::generateMonopolyBoard() {
   addNonLotPropertyToBoard(35, "Liverpool Street Station", 200, 'R');
   addFieldToBoard(36, "Chance", 'C');
   addLotToBoard(37, "Park Lane", 350, 200, 35, 175, 500, 1100, 1300, 1500, 'B');
-  addFieldToBoard(38, "Luxary Tax", 'L');
+  addFieldToBoard(38, "Luxary Tax", 'X');
   addLotToBoard(39, "Mayfair", 400, 200, 50, 200, 600, 1400, 1700, 2000, 'B'); 
 }
 
@@ -98,17 +175,27 @@ Field * Board::getFieldAtPosition(int position) {
   return fp;
 }
 
-int main() {
+/*int main() {
   Board * board = new Board();
   board->generateMonopolyBoard();
   
-  Lot * lp;  
-  Field * fp = board->getFieldAtPosition(1);
-  lp = (Lot*)fp; 
+  board->canBuildOnLot(1, 'G');
+  board->setOwnerProperty(39, 34);
+  
+  Field * fp = board->getFieldAtPosition(39);
+  Lot * lp = (Lot*) fp;
 
-  lp->addBuilding();
-  lp->addBuilding();
+  cout<<lp->checkVacancy()<<endl;  
 
+  vector<int> * lv = board->getLotColorVector('O');
+  for (int i=0; i<lv->size(); i++) {
+    //cout<<lv->at(i)<<endl;
+  }
+  
+  //cout<<board->canPurchaseProperty(2)<<endl;
+  
+  cout<<board->canPurchaseProperty(37)<<endl; 
+  //cout<<board->canBuildOnLot(34, 'B')<<endl;
 
   return 1;
-}
+}*/

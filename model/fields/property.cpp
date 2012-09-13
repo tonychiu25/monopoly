@@ -14,15 +14,15 @@ Property::~Property() {}
 bool Property::checkVacancy() {
   bool propertyBought;
   if (ownerIndex == -1) {  // -1 indicates vacant
-    propertyBought = false;
-  } else {
     propertyBought = true;
+  } else {
+    propertyBought = false;
   }
 
   return propertyBought;
 }
 
-void Property::buyProperty(int playerIndex){
+void Property::setPropertyOwner(int playerIndex){
   ownerIndex = playerIndex;
 }
 

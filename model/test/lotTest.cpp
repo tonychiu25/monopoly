@@ -10,7 +10,7 @@ using namespace std;
 
 void checkAddBuilding() {
   int rentList[] = {1,2,3,4,5,6};
-  Lot * lp = new Lot(1,"D",3,3,rentList);
+  Lot * lp = new Lot(1,"D",3,3,rentList, 'R');
   assert(lp->getBuildingCount() == 0);
   lp->addBuilding();
   assert(lp->getBuildingCount() == 1);
@@ -28,17 +28,19 @@ void checkAddBuilding() {
 
 void checkRent() {
   int rentList[] = {1,2,3,4,5,6};
-  Lot * lp = new Lot(1,"D",3,3,rentList);
+  Lot * lp = new Lot(1,"D",3,3,rentList, 'R');
 
   assert(lp->getRentCost() == 1);
   lp->addBuilding();
   assert(lp->getRentCost() == 2);
   lp->addBuilding();
   assert(lp->getRentCost() == 3);
+  
+  free(lp);
 }
 
-int main() {
+/*int main() {
   checkAddBuilding();
   checkRent();
   return 1;
-}
+}*/

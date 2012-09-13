@@ -16,7 +16,7 @@ void checkPropertyFieldSet(int i, std::string n, char type, int cost) {
 
 void checkBuyProperty(int i) {
   assert(p->checkVacancy() == false);
-  p->buyProperty(i);
+  p->setPropertyOwner(i);
   assert(p->getOwnerIndex() == i);
   assert(p->checkVacancy() == true); 
 }

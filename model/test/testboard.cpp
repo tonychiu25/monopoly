@@ -6,7 +6,7 @@
 
 using namespace std;
 
-#include "testboard.h"
+#include "testheader.h"
 Board *b;
 
 bool testIndexAdded() {
@@ -62,6 +62,49 @@ bool testLotFunctions() {
   assert(lp->getRentCost() == 950);
 }
 
+bool testSetOwnerProperty() {
+  Board * b = new Board();
+  b->generateMonopolyBoard();
+  b->setOwnerProperty(1,1);
+  b->setOwnerProperty(39,1);
+  b->setOwnerProperty(15,1);
+
+  Field * fp = b->getFieldAtPosition(1);
+  Property * pp = (Property*) fp;
+  assert(pp->getOwnerIndex() == 1);
+
+  fp = b->getFieldAtPosition(15);
+  pp = (Property*) fp;
+  assert(pp->getOwnerIndex() == 1);
+  
+  fp = b->getFieldAtPosition(39);
+  pp = (Property*) fp;
+  assert(pp->getOwnerIndex() == 1);
+  
+  free(b);
+}
+
+bool testLotColorSet() {
+  Field * fp;
+  Lot * lp;
+  int i,j;
+  char color;
+  char colorSequence[] = {'L','L','T','T','T','P','P','P','O','O','O','R','R','R','Y','Y','Y','G','G','G','B','B'};
+  Board * b = new Board();
+  b->generateMonopolyBoard();
+  
+  j = 0;
+  for (i=0; i<40; i++) {
+    fp = b->getFieldAtPosition(i);
+    if (fp->getFieldType() == 'L') {
+      lp = (Lot*) fp;
+      color = lp->getLotColor();
+      assert(color == colorSequence[j]);
+      j++;    
+    }
+  }  
+}
+
 int main() {
   b = new Board();
   b->generateMonopolyBoard();
@@ -69,6 +112,8 @@ int main() {
   testIndexAdded();
   testGetLot();
   testLotFunctions(); 
-
+  testSetOwnerProperty();
+  testLotColorSet();
+  cout<<"All tests Successfully passed"<<endl;
   return 1;
 }

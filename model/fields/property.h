@@ -12,7 +12,7 @@ class Property : public Field{
     Property(int i, std::string n, char type, int cost);
     ~Property();
     bool checkVacancy();
-    void buyProperty(int playerIndex);
+    void setPropertyOwner(int playerIndex);
     int getPropertyCost();
     int getOwnerIndex();
     int getRentCost();
