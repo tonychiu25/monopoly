@@ -23,7 +23,7 @@ int Lot::getBuildingCount() {
 }
 
 void Lot::addBuilding() {
-  if (buildingCount <= maxBuildingCount) {  
+  if (buildingCount <= maxBuildingCount) {
     buildingCount++;
   }
 }

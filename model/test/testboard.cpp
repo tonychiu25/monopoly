@@ -102,7 +102,86 @@ bool testLotColorSet() {
       assert(color == colorSequence[j]);
       j++;    
     }
-  }  
+  }
+
+  free(b);  
+}
+
+bool testErectBuilding() {
+  Board * b = new Board();
+  Field * fp;
+  Lot * lp;
+
+  b->generateMonopolyBoard();
+  b->setOwnerProperty(1, 22);
+
+  fp = b->getFieldAtPosition(1);
+  lp = (Lot*) fp;
+
+  for (int i=1; i <= 5; i++) {
+    b->erectBuilding(1);
+    assert(lp->getBuildingCount() == i);
+  }
+
+  free(b); 
+}
+
+bool testCanBuildOnLot() {
+  Board * b = new Board();
+  b->generateMonopolyBoard();
+  
+  b->setOwnerProperty(1,33);
+  b->setOwnerProperty(3,33);
+  assert(b->canBuildOnLot(33, 'L') == 1);
+
+  b->setOwnerProperty(6,33);
+  b->setOwnerProperty(8,33);
+  b->setOwnerProperty(9,33);
+  assert(b->canBuildOnLot(33, 'T') == 1);
+
+  b->setOwnerProperty(37,33);
+  b->setOwnerProperty(39,4);
+  assert(b->canBuildOnLot(33, 'B') == 0);
+  assert(b->canBuildOnLot(4, 'B') == 0);
+
+  b->setOwnerProperty(31, 33);
+  assert(b->canBuildOnLot(33, 'G') == 0);
+
+  assert(b->canBuildOnLot(33, 'R') == 0);
+  
+  free(b);
+}
+
+bool testCanPurchaseProperty() {
+  Board * b = new Board();
+  b->generateMonopolyBoard();
+
+  assert(b->canPurchaseProperty(1) == 1);
+  b->setOwnerProperty(1,1);
+  assert(b->canPurchaseProperty(1) == 0);
+
+  assert(b->canPurchaseProperty(5) == 1);
+  b->setOwnerProperty(5,1);
+  assert(b->canPurchaseProperty(5) == 0);
+
+  assert(b->canPurchaseProperty(12) == 1);
+  b->setOwnerProperty(12,1);
+  assert(b->canPurchaseProperty(12) == 0);
+
+  assert(b->canPurchaseProperty(28) == 1);
+  b->setOwnerProperty(28,1);
+  assert(b->canPurchaseProperty(28) == 0);
+}
+
+bool testGetPropertyRent() {
+  Board * b = new Board();
+  b->generateMonopolyBoard();
+  int rentlist[] = {50,200,600,1400,1700,2000};
+  b->setOwnerProperty(39, 1);
+  for(int i=0; i<6; i++) {
+    assert(rentlist[i] == b->getPropertyRent(39));
+    b->erectBuilding(39);
+  }
 }
 
 int main() {
@@ -114,6 +193,10 @@ int main() {
   testLotFunctions(); 
   testSetOwnerProperty();
   testLotColorSet();
+  testErectBuilding();
+  testCanBuildOnLot();
+  testCanPurchaseProperty();
+  testGetPropertyRent();
   cout<<"All tests Successfully passed"<<endl;
   return 1;
 }

@@ -65,7 +65,6 @@ void Board::erectBuilding(int boardPos) {
 
   fp = getFieldAtPosition(boardPos);
   lp = castToLotPt(fp);
-
   lp->addBuilding(); 
 }
 
@@ -114,13 +113,27 @@ bool Board::canPurchaseProperty(int boardPos) {
 int Board::getPropertyRent(int boardPos) {
   Field * fp;
   Property * pp;
+  Lot * lp;
+  char type;
+
+  fp = getFieldAtPosition(boardPos);
+  type = fp->getFieldType();
+
+  if (type == 'L') {
+    lp = castToLotPt(fp);
+    return lp->getRentCost();
+  } else {
+    pp = castToPropertyPt(fp);
+    return pp->getRentCost();
+  }
+  /*Property * pp;
 
   pp = (Property*) fp;
   if (pp->checkVacancy()) {
     return 0;
   } else {
     return pp->getRentCost();
-  }
+  }*/
 }
 
 void Board::generateMonopolyBoard() {

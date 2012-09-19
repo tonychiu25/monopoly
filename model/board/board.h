@@ -18,7 +18,7 @@ class Board {
     void setOwnerProperty(int boardPos, int playerIndex);
     void erectBuilding(int boardPos);
     Field * getFieldAtPosition(int position);
-    vector<int>*  getLotColorVector(char color);
+    //vector<int>*  getLotColorVector(char color);
     bool canBuildOnLot(int playerIndex, char color);
     bool canPurchaseProperty(int boardPos);
     int getPropertyRent(int boardPos);
@@ -28,6 +28,7 @@ class Board {
     vector<Field*> board;
     map<char, vector<int>* > lotset;
     void putLotColor(char color, int i);
+    vector<int>*  getLotColorVector(char color);
     void addLotToBoard(int i, std::string n, int c, int buildingCost, int r0, int r1, int r2, int r3, int r4, int r5, char color);
     void addNonLotPropertyToBoard(int i, std::string n, int c, char type);
     void addFieldToBoard(int i, std::string n, char type);
