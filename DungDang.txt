@@ -1,1 +1,2 @@
 I am Dung - a new solider.
+This is the second line.
